@@ -16,7 +16,8 @@ TARGET = type_traits \
 		enable_if \
 		CRTP \
 		variadic_templates \
-		rvalue
+		rvalue \
+		regex
 
 
 all: $(TARGET)
@@ -35,6 +36,9 @@ variadic_templates: variadic_templates.cpp
 
 rvalue: rvalue.cpp
 	$(CXX) $(CXXFLAGS) $(SPECIAL_FLAGS) $(TURNOFF_FLAGS) $< -o $@
+
+regex: regex.cpp
+	$(CXX) $(CXXFLAGS) $(SPECIAL_FLAGS) $< -o $@
 
 clean:
 	$(RM) $(TARGET) *.o *.class
