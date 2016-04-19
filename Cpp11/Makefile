@@ -8,13 +8,15 @@ CFLAGS = $(CXXFLAGS)
 #  -Wall turns on most, but not all, compiler warnings
 CXXFLAGS  = -Wall -Werror
 #LDFLAGS = -lm
-SPECIAL_FLAGS = -std=c++0x
+SPECIAL_FLAGS = -std=c++11
+TURNOFF_FLAGS = -fno-elide-constructors
 
 # the build target executable:
 TARGET = type_traits \
 		enable_if \
 		CRTP \
-		variadic_templates
+		variadic_templates \
+		rvalue
 
 
 all: $(TARGET)
@@ -30,6 +32,9 @@ CRTP: CRTP.cpp
 
 variadic_templates: variadic_templates.cpp
 	$(CXX) $(CXXFLAGS) $(SPECIAL_FLAGS) $< -o $@
+
+rvalue: rvalue.cpp
+	$(CXX) $(CXXFLAGS) $(SPECIAL_FLAGS) $(TURNOFF_FLAGS) $< -o $@
 
 clean:
 	$(RM) $(TARGET) *.o *.class
