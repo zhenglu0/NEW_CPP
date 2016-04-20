@@ -47,5 +47,31 @@ int main ()
   }
   std::cout << std::endl;
 
+  // The hard-coded regular expression in Example contains lots of backslashes.
+  // This is necessary because I am escaping certain characters twice: once for the compiler,
+  // and once for the regular expression engine.
+  std::string ss = "http://www.foo.com/bar";
+  std::string re_raw     = "(ftp|http|https):\\/\\/((\\w+\\.)*(\\w*))\\/([\\w\\d]+\\/{0,1})+";
+  std::cout << re_raw << std::endl;
+  std::string re_literal = R"((ftp|http|https):\/\/((\w+\.)*(\w*))\/([\w\d]+\/{0,1})+)";
+  std::cout << re_literal << std::endl;
+  std::regex re(re_literal);
+
+  std::cmatch matches;
+  if (regex_match(ss.c_str(), matches, re))
+  {
+     // matches[0] contains the original string.  matches[n]
+     // contains a sub_match object for each matching
+     // subexpression
+     for (int i = 1; i < matches.size(); i++)
+     {
+        // sub_match::first and sub_match::second are iterators that
+        // refer to the first and one past the last chars of the
+        // matching subexpression
+        std::string match(matches[i].first, matches[i].second);
+        std::cout << "\tmatches[" << i << "] = " << match << std::endl;
+     }
+  }
+
   return 0;
 }
