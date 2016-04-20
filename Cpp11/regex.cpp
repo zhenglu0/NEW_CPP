@@ -63,7 +63,7 @@ int main ()
      // matches[0] contains the original string.  matches[n]
      // contains a sub_match object for each matching
      // subexpression
-     for (int i = 1; i < matches.size(); i++)
+     for (size_t i = 1; i < matches.size(); i++)
      {
         // sub_match::first and sub_match::second are iterators that
         // refer to the first and one past the last chars of the
