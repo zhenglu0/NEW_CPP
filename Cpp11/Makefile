@@ -17,7 +17,8 @@ TARGET = type_traits \
 		CRTP \
 		variadic_templates \
 		rvalue \
-		regex
+		regex \
+		constexpr
 
 
 all: $(TARGET)
@@ -38,6 +39,9 @@ rvalue: rvalue.cpp
 	$(CXX) $(CXXFLAGS) $(SPECIAL_FLAGS) $(TURNOFF_FLAGS) $< -o $@
 
 regex: regex.cpp
+	$(CXX) $(CXXFLAGS) $(SPECIAL_FLAGS) $< -o $@
+
+constexpr: constexpr.cpp
 	$(CXX) $(CXXFLAGS) $(SPECIAL_FLAGS) $< -o $@
 
 clean:
